@@ -4,8 +4,40 @@
     <meta charset="utf-8">
     <title>三平方の定理練習</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+details{
+  display:none
+}
+#ddwn:checked~div>details{
+  display:inline
+}
+body>div>span{
+  display:none
+}
+#input:checked~div>span{
+  display:inline
+}
+#input:checked~div>span>:valid+span::after{
+  content:"正解"
+}
+
+#input:checked~div>span>:invalid+span::after{
+  content:"不正解"
+}
+    </style>
   </head>
   <body>
+    判定方法<br>
+    <input type="radio" name="validation" value="0" id="ddwn">
+    <label for="ddwn">
+    ドロップダウン
+    </label>
+    <br>
+    <input type="radio" name="validation" value="0" id="input">
+    <label for="input">
+    入力
+    </label>
+    <br>
     <script>
 function factors(n){
   if(n < 2)
@@ -66,7 +98,11 @@ function main(){
     buf +=
 `
 ${r?'他の一辺':'斜辺'}：${r?A:C} cm<br>
-他の一辺：${B} cm
+他の一辺：${B} cm<br>
+<span>
+  ${r?'斜辺':'他の一辺'}：<input type="text" class="answer" pattern="${(r?C:A).replace('√','[rR]')}">
+  <span><br></span>
+</span>
 <details>
   <summary>
     ${r?'斜辺':'他の一辺'}
