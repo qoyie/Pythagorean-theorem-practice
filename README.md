@@ -1,10 +1,6 @@
 # Link
 [link](https://qoyie.github.io/Pythagorean-theorem-practice/)
 
-# Bookmark this
-
-javascript:(()=%3E%7Bfunction%20e(e)%7Bif(e%3C2)return%5B%5D;let%20t=%5B%5D;for(;!(1&e);)e%3E%3E=1,t.push(2);for(let%20n=3;!(n*n%3Ee);n+=2)for(;e%25n==0;)t.push(n),e=Math.floor(e/n);return%20e%3E1&&t.push(e),t%7Dfunction%20t(t)%7Bif(t%3C2)return%22%22+t;let%20n=e(t),r=1,o=1,l=n%5B0%5D;for(let%20m=1;m%3Cn.length;m++)n%5Bm%5D==l?(r*=l,l=++m%3Cn.length?n%5Bm%5D:1):(o*=l,l=n%5Bm%5D);return(1==r?%22%22:r)+(1==(o*=l)?%22%22:%22%E2%88%9A%22+o)%7Dlet%20n=open().document,r=n.createElement(%22button%22);r.textContent=%22%E5%86%8D%E7%94%9F%E6%88%90%22,r.addEventListener(%22click%22,l),n.body.append(r);let%20o=n.createElement(%22div%22);function%20l()%7Blet%20e=%22%22;for(let%20n=0;n%3C10;n++)%7Blet%20r=Math.floor(20*Math.random())+1,l=Math.floor(20*Math.random())+1,%5Bm,u,a%5D=%5Br,l,r+l%5D.map(t),d=.5%3EMath.random();e+=(d?%22%E4%BB%96%E3%81%AE%E4%B8%80%E8%BE%BA%22:%22%E6%96%9C%E8%BE%BA%22)+%22%EF%BC%9A%22+(d?m:a)+%22%20cm%3Cbr%3E%E4%BB%96%E3%81%AE%E4%B8%80%E8%BE%BA%EF%BC%9A%22+u+%22%20cm%3Cdetails%3E%3Csummary%3E%22+(d?%22%E6%96%9C%E8%BE%BA%22:%22%E4%BB%96%E3%81%AE%E4%B8%80%E8%BE%BA%22)+%22%3C/summary%3E%22+(d?a:m)+%22%20cm%3C/details%3E%3Chr%3E%22%7Do.innerHTML=e%7Dn.body.append(o),l()%7D)()
-
 # code
 
 ```js
@@ -50,6 +46,41 @@ function root(n){
   return (base==1?'':base)+(root==1?'':'√'+root)
 }
 const d = open().document
+d.body.insertAdjacentHTML('beforeend',
+`
+<style>
+details{
+  display:none
+}
+#ddwn:checked~div>details{
+  display:inline
+}
+body>div>span{
+  display:none
+}
+#input:checked~div>span{
+  display:inline
+}
+#input:checked~div>span>:valid+span::after{
+  content:"正解"
+}
+
+#input:checked~div>span>:invalid+span::after{
+  content:"不正解"
+}
+</style>
+判定方法<br>
+<input type="radio" name="validation" value="0" id="ddwn">
+<label for="ddwn">
+ドロップダウン
+</label>
+<br>
+<input type="radio" name="validation" value="0" id="input">
+<label for="input">
+入力
+</label>
+<br>
+`)
 const b = d.createElement('button')
 b.textContent='再生成'
 b.addEventListener('click',main)
@@ -68,6 +99,10 @@ function main(){
 `
 ${r?'他の一辺':'斜辺'}：${r?A:C} cm<br>
 他の一辺：${B} cm
+<span>
+  ${r?'斜辺':'他の一辺'}：<input type="text" class="answer" pattern="${(r?C:A).replace('√','[rR]')}">
+  <span><br></span>
+</span>
 <details>
   <summary>
     ${r?'斜辺':'他の一辺'}
