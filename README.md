@@ -98,7 +98,7 @@ function main(){
     buf +=
 `
 ${r?'他の一辺':'斜辺'}：${r?A:C} cm<br>
-他の一辺：${B} cm
+他の一辺：${B} cm<br>
 <span>
   ${r?'斜辺':'他の一辺'}：<input type="text" class="answer" pattern="${(r?C:A).replace('√','[rR]')}">
   <span><br></span>
