@@ -62,22 +62,27 @@ body>div>span{
   display:inline
 }
 #input:checked~div>span>:valid+span::after{
+  color:red;
   content:"正解"
 }
 
 #input:checked~div>span>:invalid+span::after{
+  color:blue;
   content:"不正解"
+}
+#input:checked~div>span>:placeholder-shown+span::after{
+  content:""
 }
 </style>
 判定方法<br>
+<input type="radio" name="validation" value="0" id="input" checked>
+<label for="input">
+入力
+</label>
+<br>
 <input type="radio" name="validation" value="0" id="ddwn">
 <label for="ddwn">
 ドロップダウン
-</label>
-<br>
-<input type="radio" name="validation" value="0" id="input">
-<label for="input">
-入力
 </label>
 <br>
 `)
@@ -100,7 +105,7 @@ function main(){
 ${r?'他の一辺':'斜辺'}：${r?A:C} cm<br>
 他の一辺：${B} cm<br>
 <span>
-  ${r?'斜辺':'他の一辺'}：<input type="text" class="answer" pattern="${(r?C:A).replace('√','[rR]')}">
+  ${r?'斜辺':'他の一辺'}：<input type="text" class="answer" pattern="${(r?C:A).replace('√','[rR√]')}" placeholder=" ">
   <span><br></span>
 </span>
 <details>
