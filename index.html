@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>三平方の定理練習</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+  <body>
+    <script>
+function factors(n){
+  if(n < 2)
+    return []
+  const prime_factors = []
+  while(!(n&1)){
+    n>>=1;
+    prime_factors.push(2)
+  }
+  for(let p=3;;p+=2){
+    if(p*p > n) break
+    while(n % p == 0){
+      prime_factors.push(p)
+      n = Math.floor(n/p)
+    }
+  }
+  if(n > 1)
+    prime_factors.push(n)
+  return prime_factors
+}
+function root(n){
+  if(n < 2)
+    return '' + n
+  const prime_factors = factors(n)
+  let base = 1
+  let root = 1
+  let prev = prime_factors[0];
+  for(let i = 1; i < prime_factors.length; i++){
+    if(prime_factors[i] == prev){
+      base *= prev
+      if(++i < prime_factors.length)
+        prev = prime_factors[i]
+      else
+        prev = 1
+    }else{
+      root *= prev
+      prev = prime_factors[i]
+    }
+  }
+  root *= prev
+  return (base==1?'':base)+(root==1?'':'√'+root)
+}
+const d = document
+const b = d.createElement('button')
+b.textContent='再生成'
+b.addEventListener('click',main)
+d.body.append(b)
+const result = d.createElement('div')
+d.body.append(result)
+function main(){
+  let buf=''
+  for(let i = 0;i < 10; i++){
+    const a = Math.floor(Math.random()*20) + 1
+    const b = Math.floor(Math.random()*20) + 1
+    const c = a + b
+    const [A,B,C] = [a,b,a+b].map(root)
+    const r = Math.random() < 0.5
+    buf +=
+`
+${r?'他の一辺':'斜辺'}：${r?A:C} cm<br>
+他の一辺：${B} cm
+<details>
+  <summary>
+    ${r?'斜辺':'他の一辺'}
+  </summary>
+  ${r?C:A} cm
+</details>
+<hr>
+`
+  }
+  result.innerHTML=buf
+}
+main()
+    </script>
+  </body>
+</html>
